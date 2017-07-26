@@ -3,9 +3,9 @@
 
     angular.module('wemGaApp').controller(WemGaAppController);
 
-    WemGaAppController.$inject = ['$scope','$sce', '$mdToast', 'jcrService', 'i18nService', '_'];
+    WemGaAppController.$inject = ['$scope','$sce', '$mdToast', 'jcrService', 'i18nService'];
 
-    function WemGaAppController($scope,$sce,$mdToast,jcrService, i18nService, _){
+    function WemGaAppController($scope,$sce,$mdToast,jcrService, i18nService){
         $scope.configuration = {
             identifier:null,
             newTag : null,

@@ -1,0 +1,27 @@
+{
+  "name": "mf-google-analytics",
+  "version": "1.0.0",
+  "description": "This is the custom module (Marketing Factory - Google Analytics) for running on a Digital Experience Manager server.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jahia/mf-google-analytics.git"
+  },
+  "author": "Jahia (rahmed)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jahia/mf-google-analytics/issues"
+  },
+  "homepage": "https://github.com/Jahia/mf-google-analytics#readme",
+  "dependencies": {
+    "angular": "^1.6.5",
+    "angular-animate": "^1.6.5",
+    "angular-aria": "^1.6.5",
+    "angular-material": "^1.1.4",
+    "angular-messages": "^1.6.5",
+    "underscore": "^1.8.3"
+  }
+}
