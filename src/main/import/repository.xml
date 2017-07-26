@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content xmlns:j="http://www.jahia.org/jahia/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0">
+    <modules jcr:primaryType="jnt:modules">
+        <mf-google-analytics j:dependencies="contentRetrieval default jcrestapi"
+                           j:installedModules="mf-google-analytics"
+                           j:modulePriority="0"
+                           j:moduleType="module"
+                           j:title="Jahia Marketing Factory Google Analytics"
+                           jcr:primaryType="jnt:module">
+                
+                <portlets jcr:primaryType="jnt:portletFolder"/>
+                <files jcr:primaryType="jnt:folder"/>
+                <contents jcr:primaryType="jnt:contentFolder">
+                    <wemga-settings autofill="true"
+                            inserttag="true"
+                            jcr:primaryType="wemga:configuration"/>
+                </contents>
+                <templates j:rootTemplatePath="/" jcr:primaryType="jnt:templatesFolder">
+                    <files jcr:primaryType="jnt:folder">
+                        <logo_google.png j:height="16"
+                                j:width="16"
+                                jcr:mixinTypes="jmix:image"
+                                jcr:primaryType="jnt:file">
+                            <jcr:content jcr:mimeType="image/png" jcr:primaryType="jnt:resource"/>
+                            <thumbnail jcr:mimeType="image/png" jcr:primaryType="jnt:resource"/>
+                            <thumbnail2 jcr:mimeType="image/png" jcr:primaryType="jnt:resource"/>
+                        </logo_google.png>
+                    </files>
+                    <contents jcr:primaryType="jnt:contentFolder">
+                        <wemga-settings autofill="true"
+                               inserttag="true"
+                               jcr:primaryType="wemga:configuration"/>
+                    </contents>
+                    <site-settings-base j:view="wemga"
+                                jcr:mixinTypes="jmix:useUILocale"
+                                jcr:primaryType="jnt:template">
+                        <google-analytics j:applyOn="jnt:virtualsite"
+                                 j:defaultTemplate="false"
+                                 j:hiddenTemplate="true"
+                                 j:icon="/modules/mf-google-analytics/templates/files/logo_google.png"
+                                 j:titleKey="wemga"
+                                 jcr:mixinTypes="jmix:rbTitle"
+                                 jcr:primaryType="jnt:contentTemplate">
+                            <pagecontent jcr:primaryType="jnt:contentList">
+                                <wemga-settings jcr:primaryType="wemga:settings"/>
+                            </pagecontent>
+                        </google-analytics>
+                    </site-settings-base>
+                </templates>
+                
+            </mf-google-analytics>
+    </modules>
+</content>
