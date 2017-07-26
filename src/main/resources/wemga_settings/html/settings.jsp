@@ -15,17 +15,11 @@
 <%--@elvariable id="currentResource" type="org.jahia.services.render.Resource"--%>
 <%--@elvariable id="url" type="org.jahia.services.render.URLGenerator"--%>
 <%--@elvariable id="subchild" type="org.jahia.services.content.JCRNodeWrapper"--%>
-<template:addResources type="css" resources="wemga/vendor/angular-material.css"/>
-<template:addResources type="css" resources="wemga/wemga.css"/>
+<template:addResources type="css" resources="wemga/dist/css/angular-material.min.css"/>
+<template:addResources type="css" resources="wemga/dist/css/wemga.css"/>
 
-<template:addResources type="javascript" resources="wemga/vendor/angular.js,
-                                                    wemga/vendor/angular-animate.js,
-                                                    wemga/vendor/angular-aria.js,
-                                                    wemga/vendor/angular-messages.js,
-                                                    wemga/vendor/angular-material.js,
-                                                    wemga/vendor/angular-route.js" />
-
-<template:addResources type="javascript" resources="wemga/underscore.js, wemga/angular-underscore.js, wemga/i18n.js, wemga/jahiaRestAPI-services.js, wemga/configuration.app.js, wemga/pathHandler.js, wemga/folderPicker.js"/>
+<template:addResources type="javascript" resources="wemga/dist/wemgaVendor.js,
+                                                    wemga/dist/wemgaApp.js" />
 
 <template:addResources>
 <script type="text/javascript">
