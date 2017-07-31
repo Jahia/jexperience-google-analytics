@@ -64,18 +64,20 @@
     <scm>
         <connection>scm:git:git@github.com:Jahia/mf-google-analytics.git</connection>
         <developerConnection>scm:git:git@github.com:Jahia/mf-google-analytics.git</developerConnection>
-        <url>https://github.com/Jahia/at-internet</url>
+        <url>https://github.com/Jahia/mf-google-analytics</url>
     </scm>
     <properties>
-        <jahia-depends>default,contentRetrieval,jcrestapi</jahia-depends>
+        <jahia-depends>default,contentRetrieval,marketing-factory-core,jcrestapi</jahia-depends>
     </properties>
     <dependencies>
+        <!--
         <dependency>
             <groupId>org.jahia.modules</groupId>
             <artifactId>marketing-factory-core</artifactId>
             <version>[1.6.0,)</version>
             <scope>provided</scope>
         </dependency>
+        -->
     </dependencies>
     <distributionManagement>
         <repository>
@@ -139,6 +141,16 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Fragment-Host>marketing-factory-core</Fragment-Host>
+                    </instructions>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>jahia-maven-plugin</artifactId>

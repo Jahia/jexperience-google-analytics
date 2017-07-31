@@ -1,32 +1,28 @@
 <jnt = 'http://www.jahia.org/jahia/nt/1.0'>
 <jmix = 'http://www.jahia.org/jahia/mix/1.0'>
-<wemgamix = 'http://www.jahia.org/jahia/wemga/mix/1.0'>
-<wemga = 'http://www.jahia.org/jahia/at/wemga/1.0'>
+<wemgooglemix = 'http://www.jahia.org/jahia/wemga/mix/1.0'>
+<wemgoogle = 'http://www.jahia.org/jahia/at/wemga/1.0'>
 
 //Page Level
-[wemgamix:page] mixin
+[wemgooglemix:page] mixin
  itemtype = options
- - wem:atPageName (string)
+ - wemga:pageName (string)
 
 //Area Level
-[wemgamix:area] mixin
+[wemgooglemix:experience] mixin
  itemtype = options
- - wem:atTestLabel (string)
- - wem:atTestId (long)
- - wem:atWaveId (long)
+ - wemga:testLabel (string)
+ - wemga:testUrl (string)
+ - wemga:profileId (string)
 
 //Variant
-[wemgamix:variant] mixin
+[wemgooglemix:variable] mixin
  itemtype = options
- - wem:atCreationLabel (string)
- - wem:atCreationId (long)
- - wem:atVariableId (long)
- - wem:atVariableLabel (string)
- - wem:atVersionId (long)
- - wem:atVersionLabel (string)
+ - wemga:variableLabel (string)
+ - wemga:variableUrl (string)
 
-[wemga:settings] > jnt:content, jmix:multimediaContent, jmix:hiddenType
+[wemgoogle:settings] > jnt:content, jmix:multimediaContent, jmix:hiddenType
 
-[wemga:configuration] > jnt:content, jmix:multimediaContent
+[wemgoogle:configuration] > jnt:content, jmix:multimediaContent
  - autofill (boolean) = true autocreated
  - inserttag (boolean) = true autocreated

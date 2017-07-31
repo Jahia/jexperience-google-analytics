@@ -13,7 +13,7 @@
                 <contents jcr:primaryType="jnt:contentFolder">
                     <wemga-settings autofill="true"
                             inserttag="true"
-                            jcr:primaryType="wemga:configuration"/>
+                            jcr:primaryType="wemgoogle:configuration"/>
                 </contents>
                 <templates j:rootTemplatePath="/" jcr:primaryType="jnt:templatesFolder">
                     <files jcr:primaryType="jnt:folder">
@@ -29,7 +29,7 @@
                     <contents jcr:primaryType="jnt:contentFolder">
                         <wemga-settings autofill="true"
                                inserttag="true"
-                               jcr:primaryType="wemga:configuration"/>
+                               jcr:primaryType="wemgoogle:configuration"/>
                     </contents>
                     <site-settings-base j:view="wemga"
                                 jcr:mixinTypes="jmix:useUILocale"
@@ -42,7 +42,7 @@
                                  jcr:mixinTypes="jmix:rbTitle"
                                  jcr:primaryType="jnt:contentTemplate">
                             <pagecontent jcr:primaryType="jnt:contentList">
-                                <wemga-settings jcr:primaryType="wemga:settings"/>
+                                <wemga-settings jcr:primaryType="wemgoogle:settings"/>
                             </pagecontent>
                         </google-analytics>
                     </site-settings-base>
