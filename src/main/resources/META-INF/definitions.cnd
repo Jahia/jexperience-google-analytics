@@ -9,17 +9,14 @@
  - wemga:pageName (string)
 
 //Area Level
-[wemgooglemix:experience] mixin
+[wemgooglemix:experiment] mixin
  itemtype = options
- - wemga:testLabel (string)
- - wemga:testUrl (string)
- - wemga:profileId (string)
+ - wemga:experimentId (string)
 
 //Variant
 [wemgooglemix:variable] mixin
  itemtype = options
- - wemga:variableLabel (string)
- - wemga:variableUrl (string)
+ - wemga:variableId (string)
 
 [wemgoogle:settings] > jnt:content, jmix:multimediaContent, jmix:hiddenType
 

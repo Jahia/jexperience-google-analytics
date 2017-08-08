@@ -67,7 +67,7 @@
         <url>https://github.com/Jahia/mf-google-analytics</url>
     </scm>
     <properties>
-        <jahia-depends>default,contentRetrieval,marketing-factory-core,jcrestapi</jahia-depends>
+        <jahia-depends>default,contentRetrieval,marketing-factory-core,jcrestapi, googleAnalytics</jahia-depends>
     </properties>
     <dependencies>
         <!--
