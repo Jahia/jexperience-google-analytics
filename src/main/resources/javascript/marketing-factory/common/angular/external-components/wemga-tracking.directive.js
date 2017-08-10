@@ -4,7 +4,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
 
 (function() {
     'use strict';
-    angular.module('wemApp.components').directive('wemgaTracking', wemgaTracking);
+    angular.module('wemApp.components').directive('wemGoogle', wemgaTracking);
     function wemgaTracking() {
         return {
             restrict: 'E',
@@ -169,12 +169,14 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                 });
             } else {
                 var request = gapi.client.analytics.management.experiments.insert(vm.googleExperiment);
+                var nodesId = "";
                 request.execute(function (response) {
                     if(response.code>300){
                         loadingSpinnerService.hide();
                         notificationService.errorToast('Google analytics error : '+response.message);
                     } else {
                         console.info('wemga-tracking.directive.js - Experiment inserted successfully');
+                        nodesId.length >0?nodesId+=","+vm.persoObject.nodeIdentifier:nodesId+=vm.persoObject.nodeIdentifier;
                         jcrService.addMixin('default', null, vm.persoObject.nodeIdentifier, 'wemgooglemix:experiment', {'properties':{'wemga__experimentId':{'value' : response.result.id}}}, false).then(function (response) {
                             //Save the perso as variant if perso is on a page
                             if(vm.persoObjectNode.type == 'jnt:page'){
@@ -182,9 +184,10 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                             }
                             var var_index = 1;
                             _.each(vm.persoObject.variants,function(variable,index){
+                                nodesId.length >0?nodesId+=","+variable.nodeIdentifier:nodesId+=variable.nodeIdentifier;
                                 jcrService.addMixin('default', null, variable.nodeIdentifier, 'wemgooglemix:variable', {'properties':{'wemga__variableId':{'value' : vm.persoObjectNode.type == 'jnt:page'?index+1:index}}}, false).then(function(response){
                                     if(var_index == vm.persoObject.variants.length){
-                                        $http.post(ManagersContext.baseEdit + ManagersContext.currentSitePath + ".publishNodeAction.do?nodeid="+vm.persoObject.nodeIdentifier).then(function(then_response){
+                                        $http.post(ManagersContext.baseEdit + ManagersContext.currentSitePath + ".publishNodeAction.do?nodesid="+nodesId, {nodesIdobject:nodesId}).then(function(then_response){
                                             loadingSpinnerService.hide();
                                             vm.buttonLabel = i18nService.message('wemga.button.update.label');
                                             notificationService.successToast('Saved successfully to Google analytics');

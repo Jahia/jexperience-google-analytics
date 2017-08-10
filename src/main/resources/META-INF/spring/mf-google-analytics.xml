@@ -12,4 +12,10 @@
         <property name="scriptEngineUtils" ref="scriptEngineUtils"/>
         <property name="template" value="${googleAnalyticsTemplate:/modules/mf-google-analytics/WEB-INF/scripts/googleAnalytics_send_experiments.groovy}"/>
     </bean>
+
+    <bean id="publishNodeAction" class="org.jahia.modules.mfgoogleanalytics.actions.PublishNode">
+        <property name="name" value="publishNodeAction"/>
+        <property name="requiredPermission" value="canAccessMarketingFactory"/>
+    </bean>
+
 </beans>
