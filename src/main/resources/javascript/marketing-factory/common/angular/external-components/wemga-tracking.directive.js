@@ -156,7 +156,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
          */
         function _saveExperiment(){
             if(vm.persoObjectNode.mixins.wemgooglemix__experiment){
-                vm.googleExperiment.experimentId = vm.persoObjectNode.properties.wemga__experimentId.value;
+                vm.googleExperiment.experimentId = vm.persoObjectNode.properties.wemgaExperimentId.value;
                 var request = gapi.client.analytics.management.experiments.update(vm.googleExperiment);
                 request.execute(function (response) {
                     if(response.code>300){
@@ -177,15 +177,15 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                     } else {
                         console.info('wemga-tracking.directive.js - Experiment inserted successfully');
                         nodesId.length >0?nodesId+=","+vm.persoObject.nodeIdentifier:nodesId+=vm.persoObject.nodeIdentifier;
-                        jcrService.addMixin('default', null, vm.persoObject.nodeIdentifier, 'wemgooglemix:experiment', {'properties':{'wemga__experimentId':{'value' : response.result.id}}}, false).then(function (response) {
+                        jcrService.addMixin('default', null, vm.persoObject.nodeIdentifier, 'wemgooglemix:experiment', {'properties':{'wemgaExperimentId':{'value' : response.result.id}}}, false).then(function (response) {
                             //Save the perso as variant if perso is on a page
                             if(vm.persoObjectNode.type == 'jnt:page'){
-                                jcrService.addMixin('default', null, vm.persoObject.nodeIdentifier, 'wemgooglemix:variable', {'properties':{'wemga__variableId':{'value' : 0}}}, false);
+                                jcrService.addMixin('default', null, vm.persoObject.nodeIdentifier, 'wemgooglemix:variable', {'properties':{'wemgaVariableId':{'value' : 0}}}, false);
                             }
                             var var_index = 1;
                             _.each(vm.persoObject.variants,function(variable,index){
                                 nodesId.length >0?nodesId+=","+variable.nodeIdentifier:nodesId+=variable.nodeIdentifier;
-                                jcrService.addMixin('default', null, variable.nodeIdentifier, 'wemgooglemix:variable', {'properties':{'wemga__variableId':{'value' : vm.persoObjectNode.type == 'jnt:page'?index+1:index}}}, false).then(function(response){
+                                jcrService.addMixin('default', null, variable.nodeIdentifier, 'wemgooglemix:variable', {'properties':{'wemgaVariableId':{'value' : vm.persoObjectNode.type == 'jnt:page'?index+1:index}}}, false).then(function(response){
                                     if(var_index == vm.persoObject.variants.length){
                                         $http.post(ManagersContext.baseEdit + ManagersContext.currentSitePath + ".publishNodeAction.do?nodesid="+nodesId, {nodesIdobject:nodesId}).then(function(then_response){
                                             loadingSpinnerService.hide();

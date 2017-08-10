@@ -115,8 +115,8 @@ function jahiaAPIStandardCall(urlContext, workspace, locale, way, endOfURI, meth
 function getVariantFields(variantNode,googleFields){
     if(variantNode !=null && variantNode.properties !=null){
         //Get At internet attribute from variant node
-        if(variantNode.properties['wemga__variableId'] != undefined){
-            googleFields.variant.variableId = parseInt(variantNode.properties['wemga__variableId'].value);
+        if(variantNode.properties['wemgaVariableId'] != undefined){
+            googleFields.variant.variableId = parseInt(variantNode.properties['wemgaVariableId'].value);
         }
         googleFields.variant.jcrId = variantNode.properties['jcr__uuid'].value;
     }
@@ -130,8 +130,8 @@ function getVariantFields(variantNode,googleFields){
 function getWrapperFields(wrapperNode,googleFields){
     if(wrapperNode !=null && wrapperNode !=undefined && wrapperNode.properties !=null && wrapperNode.properties !=undefined){
         //Get At internet attribute from area node
-        if(wrapperNode.properties['wemga__experimentId'] != undefined){
-            googleFields.area.experimentId = wrapperNode.properties['wemga__experimentId'].value;
+        if(wrapperNode.properties['wemgaExperimentId'] != undefined){
+            googleFields.area.experimentId = wrapperNode.properties['wemgaExperimentId'].value;
         }
         googleFields.area.jcrId = wrapperNode.properties['jcr__uuid'].value;
     }
