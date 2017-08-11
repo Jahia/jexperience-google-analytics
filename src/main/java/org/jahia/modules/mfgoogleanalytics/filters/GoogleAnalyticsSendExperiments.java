@@ -20,9 +20,11 @@ import org.springframework.context.ApplicationListener;
 import javax.script.Bindings;
 import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
+import javax.script.SimpleScriptContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.Writer;
 import java.util.List;
 
 /**
@@ -104,5 +106,20 @@ public class GoogleAnalyticsSendExperiments extends AbstractFilter implements Ap
     }
     public void setTemplate(String template) {
         this.template = template;
+    }
+
+    class GoogleScriptContext extends SimpleScriptContext {
+        private Writer writer = null;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public Writer getWriter() {
+            if (writer == null) {
+                writer = new StringWriter();
+            }
+            return writer;
+        }
     }
 }
