@@ -8,7 +8,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
     function wemgaTracking() {
         return {
             restrict: 'E',
-            templateUrl: ManagersContext.wemAppPath + '/components/wem-google.directive.html',
+            templateUrl: ManagersContext.wemAppPath + '/external-components/wemga-tracking.directive.html',
             controller: wemgaTrackingController,
             controllerAs: 'wemgaTrackingCtrl',
             scope: {
@@ -177,15 +177,19 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                     } else {
                         console.info('wemga-tracking.directive.js - Experiment inserted successfully');
                         nodesId.length >0?nodesId+=","+vm.persoObject.nodeIdentifier:nodesId+=vm.persoObject.nodeIdentifier;
-                        jcrService.addMixin('default', null, vm.persoObject.nodeIdentifier, 'wemgooglemix:experiment', {'properties':{'wemgaExperimentId':{'value' : response.result.id}}}, false).then(function (response) {
+                        jcrService.addMixin('default', null, vm.persoObject.nodeIdentifier, 'wemgooglemix:experiment', {'properties':{
+                            'wemgaExperimentId':{'value' : response.result.id},
+                            'wemgaExperimentName':{'value' : vm.googleExperiment.resource.name},
+                            'wemgaExperimentStatus':{'value' : vm.googleExperiment.resource.status}
+                        }}, false).then(function (response) {
                             //Save the perso as variant if perso is on a page
                             if(vm.persoObjectNode.type == 'jnt:page'){
-                                jcrService.addMixin('default', null, vm.persoObject.nodeIdentifier, 'wemgooglemix:variable', {'properties':{'wemgaVariableId':{'value' : 0}}}, false);
+                                jcrService.addMixin('default', null, vm.persoObject.nodeIdentifier, 'wemgooglemix:variable', {'properties':{'wemgaVariableId':{'value' : 0},'wemgaVariableName':{'value' : vm.persoObject.displayableName.length>250?vm.persoObject.displayableName.substring(0,250):vm.persoObject.displayableName}}}, false);
                             }
                             var var_index = 1;
                             _.each(vm.persoObject.variants,function(variable,index){
                                 nodesId.length >0?nodesId+=","+variable.nodeIdentifier:nodesId+=variable.nodeIdentifier;
-                                jcrService.addMixin('default', null, variable.nodeIdentifier, 'wemgooglemix:variable', {'properties':{'wemgaVariableId':{'value' : vm.persoObjectNode.type == 'jnt:page'?index+1:index}}}, false).then(function(response){
+                                jcrService.addMixin('default', null, variable.nodeIdentifier, 'wemgooglemix:variable', {'properties':{'wemgaVariableId':{'value' : vm.persoObjectNode.type == 'jnt:page'?index+1:index},'wemgaVariableName':{'value' : variable.name.length>250?variable.name.substring(0,250):variable.name}}}, false).then(function(response){
                                     if(var_index == vm.persoObject.variants.length){
                                         $http.post(ManagersContext.baseEdit + ManagersContext.currentSitePath + ".publishNodeAction.do?nodesid="+nodesId, {nodesIdobject:nodesId}).then(function(then_response){
                                             loadingSpinnerService.hide();
