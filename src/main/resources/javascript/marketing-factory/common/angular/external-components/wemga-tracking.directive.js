@@ -4,12 +4,12 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
 
 (function() {
     'use strict';
-    angular.module('wemApp.components').directive('wemGoogle', wemgaTracking);
-    function wemgaTracking() {
+    angular.module('wemApp.components').directive('wemGoogle', wemGoogle);
+    function wemGoogle() {
         return {
             restrict: 'E',
             templateUrl: ManagersContext.wemAppPath + '/external-components/wemga-tracking.directive.html',
-            controller: wemgaTrackingController,
+            controller: wemGoogleController,
             controllerAs: 'wemgaTrackingCtrl',
             scope: {
                 variantsHolder:'@'
@@ -17,13 +17,14 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
         };
     }
 
-    wemgaTrackingController.$inject = ['$scope','_', 'jcrService', 'notificationService', 'loadingSpinnerService', 'i18nService', '$http'];
+    wemGoogleController.$inject = ['$scope','_', 'jcrService', 'notificationService', 'loadingSpinnerService', 'i18nService', '$http'];
 
-    function wemgaTrackingController($scope, _, jcrService, notificationService, loadingSpinnerService, i18nService, $http) {
+    function wemGoogleController($scope, _, jcrService, notificationService, loadingSpinnerService, i18nService, $http) {
         var vm = this;
         vm.buttonLabel = i18nService.message('wemga.button.track.label');
         vm.buttonTooltip = i18nService.message('wemga.button.tooltip.label');
         vm.persoObject = JSON.parse($scope.variantsHolder);
+        vm.notTracked = false;
         vm.persoObjectNode = null;
         jcrService.doGetOnId('default',null,vm.persoObject.nodeIdentifier).then(function(response){
             vm.persoObjectNode = response.data;
@@ -83,6 +84,12 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                     vm.googleExperiment.resource.variations.push({'name':vm.persoObject.displayableName.length>250?vm.persoObject.displayableName.substring(0,250):vm.persoObject.displayableName,'url':'','status':vm.persoObject.publicationStatus=='Published'?'ACTIVE':'INACTIVE'});
                 }
                 _.each(vm.persoObject.variants,function(variation,index){
+                    jcrService.doGetOnId('default',null,variation.nodeIdentifier).then(function(response){
+                        var currentVariant = response.data;
+                        if(!currentVariant.mixins.wemgooglemix__variable){
+                            vm.notTracked = true;
+                        }
+                    });
                     vm.googleExperiment.resource.variations.push({'name':variation.name.length>250?variation.name.substring(0,250):variation.name,'url':'','status':variation.publicationStatus=='Published'?'ACTIVE':'INACTIVE'});
                 });
                 //Save Experiment in google Analytics
@@ -118,25 +125,30 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
          * @param callback
          */
         function _start() {
-            // 2. Initialize the JavaScript client library.
-            gapi.client.init({
-                'apiKey': vm.googleProperties.googleAnalytics_apiKey,
-                // clientId and scope are optional if auth is not required.
-                'clientId': vm.googleProperties.googleAnalytics_oAuthKey,
-                'discoveryDocs': GOOGLE_API_DISCOVERY_DOCUMENTATION,
-                'scope': GOOGLE_API_SCOPE,
-            }).then(function() {
-                // 3. Initialize and make the API request.
-                return gapi.client.analytics.management.accounts.list();
-            }).then(function() {
-                console.info('wemga-tracking.directive.js - Google services connexion successful');
-                _saveExperiment();
-            }, function(reason) {
-                if(reason.result.error.code){
-                    console.info('wemga-tracking.directive.js - Not connected to google services handleling signin');
-                    return _handleGoogleSignIn().then(function(){_saveExperiment();});
-                }
-            });
+            if(vm.googleProperties.googleAnalytics_apiKey && vm.googleProperties.googleAnalytics_oAuthKey){
+                loadingSpinnerService.hide();
+                notificationService.errorToast('You need api key AND oAuthKey in order to connect to google.<br/> Please verify both are set in your site options');
+            } else {
+                // 2. Initialize the JavaScript client library.
+                gapi.client.init({
+                    'apiKey': vm.googleProperties.googleAnalytics_apiKey,
+                    // clientId and scope are optional if auth is not required.
+                    'clientId': vm.googleProperties.googleAnalytics_oAuthKey,
+                    'discoveryDocs': GOOGLE_API_DISCOVERY_DOCUMENTATION,
+                    'scope': GOOGLE_API_SCOPE,
+                }).then(function() {
+                    // 3. Initialize and make the API request.
+                    return gapi.client.analytics.management.accounts.list();
+                }).then(function() {
+                    console.info('wemga-tracking.directive.js - Google services connexion successful');
+                    _saveExperiment();
+                }, function(reason) {
+                    if(reason.result.error.code){
+                        console.info('wemga-tracking.directive.js - Not connected to google services handleling signin');
+                        return _handleGoogleSignIn().then(function(){_saveExperiment();});
+                    }
+                });
+            }
         };
 
         /**

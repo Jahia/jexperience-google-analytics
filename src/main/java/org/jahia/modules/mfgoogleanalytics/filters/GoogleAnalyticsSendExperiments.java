@@ -108,7 +108,7 @@ public class GoogleAnalyticsSendExperiments extends AbstractFilter implements Ap
         this.template = template;
     }
 
-    class GoogleScriptContext extends SimpleScriptContext {
+    private class GoogleScriptContext extends SimpleScriptContext {
         private Writer writer = null;
 
         /**
