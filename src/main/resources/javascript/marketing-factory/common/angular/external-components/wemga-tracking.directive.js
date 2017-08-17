@@ -75,6 +75,10 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                         vm.googleProperties[propertyName]=property.value;
                     }
                 });
+                if(!vm.googleExperiment.googleAnalytics_oAuthKey && vm.googleExperiment.googleAnalytics_apiKey){
+                    loadingSpinnerService.hide();
+                    notificationService.errorToast('You need api key AND oAuthKey in order to connect to google.<br/> Please verify both are set in your site options');
+                }
                 //Setup google experiment
                 vm.googleExperiment.accountId = vm.googleProperties.googleAnalytics_accountID;
                 vm.googleExperiment.webPropertyId = vm.googleProperties.googleAnalytics_webPropertyID;
@@ -125,30 +129,27 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
          * @param callback
          */
         function _start() {
-            if(vm.googleProperties.googleAnalytics_apiKey && vm.googleProperties.googleAnalytics_oAuthKey){
-                loadingSpinnerService.hide();
-                notificationService.errorToast('You need api key AND oAuthKey in order to connect to google.<br/> Please verify both are set in your site options');
-            } else {
-                // 2. Initialize the JavaScript client library.
-                gapi.client.init({
-                    'apiKey': vm.googleProperties.googleAnalytics_apiKey,
-                    // clientId and scope are optional if auth is not required.
-                    'clientId': vm.googleProperties.googleAnalytics_oAuthKey,
-                    'discoveryDocs': GOOGLE_API_DISCOVERY_DOCUMENTATION,
-                    'scope': GOOGLE_API_SCOPE,
-                }).then(function() {
-                    // 3. Initialize and make the API request.
-                    return gapi.client.analytics.management.accounts.list();
-                }).then(function() {
-                    console.info('wemga-tracking.directive.js - Google services connexion successful');
-                    _saveExperiment();
-                }, function(reason) {
-                    if(reason.result.error.code){
-                        console.info('wemga-tracking.directive.js - Not connected to google services handleling signin');
-                        return _handleGoogleSignIn().then(function(){_saveExperiment();});
-                    }
-                });
-            }
+            // 2. Initialize the JavaScript client library.
+            gapi.client.init({
+                'apiKey': vm.googleProperties.googleAnalytics_apiKey,
+                // clientId and scope are optional if auth is not required.
+                'clientId': vm.googleProperties.googleAnalytics_oAuthKey,
+                'discoveryDocs': GOOGLE_API_DISCOVERY_DOCUMENTATION,
+                'scope': GOOGLE_API_SCOPE,
+            }).then(function() {
+                // 3. Initialize and make the API request.
+                return gapi.client.analytics.management.accounts.list();
+            }).then(function() {
+                console.info('wemga-tracking.directive.js - Google services connexion successful');
+                _saveExperiment();
+            }, function(reason) {
+                if(reason.error){
+                    console.error('wemga-tracking.directive.js - Not connected to google services handleling signin');
+                    console.error(reason.details);
+                    notificationService.errorToast(reason.details);
+                    return _handleGoogleSignIn().then(function(){_saveExperiment();});
+                }
+            });
         };
 
         /**
