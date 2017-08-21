@@ -70,35 +70,40 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
             vm.googleExperiment.resource.name = vm.persoObject.displayableName;
             var sitePath = _getSiteFromNodePath(vm.persoObject.nodePath);
             jcrService.doGetOnPath('default',null,sitePath).then(function(response){
-                _.each(response.data.properties,function(property,propertyName){
-                    if(propertyName.startsWith('googleAnalytics')){
-                        vm.googleProperties[propertyName]=property.value;
-                    }
-                });
-                if(!vm.googleExperiment.googleAnalytics_oAuthKey && vm.googleExperiment.googleAnalytics_apiKey){
-                    loadingSpinnerService.hide();
-                    notificationService.errorToast('You need api key AND oAuthKey in order to connect to google.<br/> Please verify both are set in your site options');
-                }
-                //Setup google experiment
-                vm.googleExperiment.accountId = vm.googleProperties.googleAnalytics_accountID;
-                vm.googleExperiment.webPropertyId = vm.googleProperties.googleAnalytics_webPropertyID;
-                vm.googleExperiment.profileId = vm.googleProperties.googleAnalytics_profileId;
-                //Save the perso as variant if perso is on a page
-                if(vm.persoObjectNode.type == 'jnt:page'){
-                    vm.googleExperiment.resource.variations.push({'name':vm.persoObject.displayableName.length>250?vm.persoObject.displayableName.substring(0,250):vm.persoObject.displayableName,'url':'','status':vm.persoObject.publicationStatus=='Published'?'ACTIVE':'INACTIVE'});
-                }
-                _.each(vm.persoObject.variants,function(variation,index){
-                    jcrService.doGetOnId('default',null,variation.nodeIdentifier).then(function(response){
-                        var currentVariant = response.data;
-                        if(!currentVariant.mixins.wemgooglemix__variable){
-                            vm.notTracked = true;
+                if(response.data.properties['google_apiKey'] && response.data.properties['google_oAuthKey']){
+                    _.each(response.data.properties,function(property,propertyName){
+                        if(propertyName.startsWith('google')){
+                            vm.googleProperties[propertyName]=property.value;
                         }
                     });
-                    vm.googleExperiment.resource.variations.push({'name':variation.name.length>250?variation.name.substring(0,250):variation.name,'url':'','status':variation.publicationStatus=='Published'?'ACTIVE':'INACTIVE'});
-                });
-                //Save Experiment in google Analytics
-                //Init google api connexion
-                _google_authorize();
+                    if(!vm.googleExperiment.googleAnalytics_oAuthKey && vm.googleExperiment.googleAnalytics_apiKey){
+                        loadingSpinnerService.hide();
+                        notificationService.errorToast('You need api key AND oAuthKey in order to connect to google.<br/> Please verify both are set in your site options');
+                    }
+                    //Setup google experiment
+                    vm.googleExperiment.accountId = vm.googleProperties.googleAnalytics_accountID;
+                    vm.googleExperiment.webPropertyId = vm.googleProperties.googleAnalytics_webPropertyID;
+                    vm.googleExperiment.profileId = vm.googleProperties.googleAnalytics_profileId;
+                    //Save the perso as variant if perso is on a page
+                    if(vm.persoObjectNode.type == 'jnt:page'){
+                        vm.googleExperiment.resource.variations.push({'name':vm.persoObject.displayableName.length>250?vm.persoObject.displayableName.substring(0,250):vm.persoObject.displayableName,'url':'','status':vm.persoObject.publicationStatus=='Published'?'ACTIVE':'INACTIVE'});
+                    }
+                    _.each(vm.persoObject.variants,function(variation,index){
+                        jcrService.doGetOnId('default',null,variation.nodeIdentifier).then(function(response){
+                            var currentVariant = response.data;
+                            if(!currentVariant.mixins.wemgooglemix__variable){
+                                vm.notTracked = true;
+                            }
+                        });
+                        vm.googleExperiment.resource.variations.push({'name':variation.name.length>250?variation.name.substring(0,250):variation.name,'url':'','status':variation.publicationStatus=='Published'?'ACTIVE':'INACTIVE'});
+                    });
+                    //Save Experiment in google Analytics
+                    //Init google api connexion
+                    _google_authorize();
+                } else {
+                    loadingSpinnerService.hide();
+                    notificationService.errorToast("Please provide google api key and client id in your site options");
+                }
             });
         }
 
@@ -131,23 +136,41 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
         function _start() {
             // 2. Initialize the JavaScript client library.
             gapi.client.init({
-                'apiKey': vm.googleProperties.googleAnalytics_apiKey,
+
+                'apiKey': vm.googleProperties.google_apiKey,
                 // clientId and scope are optional if auth is not required.
-                'clientId': vm.googleProperties.googleAnalytics_oAuthKey,
+                'clientId': vm.googleProperties.google_oAuthKey,
                 'discoveryDocs': GOOGLE_API_DISCOVERY_DOCUMENTATION,
                 'scope': GOOGLE_API_SCOPE,
             }).then(function() {
                 // 3. Initialize and make the API request.
                 return gapi.client.analytics.management.accounts.list();
             }).then(function() {
-                console.info('wemga-tracking.directive.js - Google services connexion successful');
+                console.info('wemga-tracking.directive.js - Google services connection successful');
                 _saveExperiment();
             }, function(reason) {
                 if(reason.error){
-                    console.error('wemga-tracking.directive.js - Not connected to google services handleling signin');
-                    console.error(reason.details);
-                    notificationService.errorToast(reason.details);
-                    return _handleGoogleSignIn().then(function(){_saveExperiment();});
+                    if(reason.error == 'idpiframe_initialization_failed'){
+                        console.error(reason.details);
+                        loadingSpinnerService.hide();
+                        notificationService.errorToast(reason.details);
+                    } else {
+                        loadingSpinnerService.hide();
+                        notificationService.errorToast("Google services technical connection issue.");
+                    }
+                }
+                if(reason.result && reason.result.error){
+                    if(reason.result.error.code && reason.result.error.code == 401){
+                        console.error('wemga-tracking.directive.js - Not connected to google services handling sign in');
+                        return _handleGoogleSignIn().then(function(){_saveExperiment();});
+                    } else {
+                        loadingSpinnerService.hide();
+                        notificationService.errorToast("Google services technical connection issue.");
+                    }
+                }
+                else{
+                    loadingSpinnerService.hide();
+                    notificationService.errorToast("Google services technical connection issue.");
                 }
             });
         };
