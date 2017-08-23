@@ -13,7 +13,7 @@
 //Variant
 [wemgooglemix:variable] mixin
  itemtype = options
- - wemgaVariableId (string)
+ - wemgaVariableId (long)
  - wemgaVariableName (string)
 
 [wemgoogle:settings] > jnt:content, jmix:multimediaContent, jmix:hiddenType
