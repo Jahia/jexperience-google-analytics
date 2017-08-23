@@ -23,6 +23,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
         var vm = this;
         vm.buttonLabel = i18nService.message('wemga.button.track.label');
         vm.buttonTooltip = i18nService.message('wemga.button.tooltip.label');
+        vm.infoTooltip= i18nService.message('wemga.info.tooltip.label');
         vm.persoObject = JSON.parse($scope.variantsHolder);
         vm.notTracked = false;
         vm.persoObjectNode = null;

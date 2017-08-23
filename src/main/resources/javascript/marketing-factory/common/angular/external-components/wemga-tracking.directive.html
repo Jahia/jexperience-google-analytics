@@ -4,8 +4,10 @@
     </div>
     <div class="modal-footer profCardButFix" ng-if="wemgaTrackingCtrl.isPublished(wemgaTrackingCtrl.persoObject)">
         <button class="btn btn-primary" type="submit" ng-click="wemgaTrackingCtrl.saveGaPerso()" >{{wemgaTrackingCtrl.buttonLabel}}</button>
+        <span class="right-side-info"><i class="material-icons" title="{{wemgaTrackingCtrl.infoTooltip}}">info_outline</i></span>
     </div>
     <div class="modal-footer profCardButFix" ng-if="!wemgaTrackingCtrl.isPublished(wemgaTrackingCtrl.persoObject)">
         <button title="{{wemgaTrackingCtrl.buttonTooltip}}" class="btn btn-primary" type="submit" ng-click="wemgaTrackingCtrl.saveGaPerso()" disabled="disabled">{{wemgaTrackingCtrl.buttonLabel}}</button>
+        <span class="right-side-info"><i class="material-icons" title="{{wemgaTrackingCtrl.infoTooltip}}">info_outline</i></span>
     </div>
 </div>
