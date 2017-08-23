@@ -4,11 +4,8 @@
        xmlns:osgi="http://www.springframework.org/schema/osgi"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                            http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
-
-
     <bean id="publishNodeAction" class="org.jahia.modules.mfgoogleanalytics.actions.PublishNode">
         <property name="name" value="publishNodeAction"/>
         <property name="requiredPermission" value="canAccessMarketingFactory"/>
     </bean>
-
 </beans>
