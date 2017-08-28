@@ -70,14 +70,12 @@
         <jahia-depends>default,contentRetrieval,marketing-factory-core,jcrestapi, googleAnalytics</jahia-depends>
     </properties>
     <dependencies>
-        <!--
         <dependency>
             <groupId>org.jahia.modules</groupId>
             <artifactId>marketing-factory-core</artifactId>
-            <version>[1.6.0,)</version>
+            <version>[1.7.1,)</version>
             <scope>provided</scope>
         </dependency>
-        -->
     </dependencies>
     <distributionManagement>
         <repository>
