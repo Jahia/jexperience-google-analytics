@@ -73,7 +73,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
             jcrService.doGetOnPath('default',null,sitePath).then(function(response){
                 if(response.data.properties['google_apiKey'] && response.data.properties['google_oAuthKey']){
                     _.each(response.data.properties,function(property,propertyName){
-                        if(propertyName.startsWith('google')){
+                        if(propertyName.startsWith('google') || propertyName == "webPropertyID"){
                             vm.googleProperties[propertyName]=property.value;
                         }
                     });
@@ -83,7 +83,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                     }
                     //Setup google experiment
                     vm.googleExperiment.accountId = vm.googleProperties.googleAnalytics_accountID;
-                    vm.googleExperiment.webPropertyId = vm.googleProperties.googleAnalytics_webPropertyID;
+                    vm.googleExperiment.webPropertyId = vm.googleProperties.webPropertyID;
                     vm.googleExperiment.profileId = vm.googleProperties.googleAnalytics_profileId;
                     //Save the perso as variant if perso is on a page
                     if(vm.persoObjectNode.type == 'jnt:page'){

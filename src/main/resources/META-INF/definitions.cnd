@@ -21,3 +21,12 @@
 [wemgoogle:configuration] > jnt:content, jmix:multimediaContent
  - autofill (boolean) = true autocreated
  - inserttag (boolean) = true autocreated
+
+
+[jmix:googleAnalyticsExperiment] mixin
+ extends=jnt:virtualsite
+ itemtype=options
+ - googleAnalytics_accountID (string) nofulltext
+ - googleAnalytics_profileId (string) nofulltext
+ - google_apiKey (string) nofulltext
+ - google_oAuthKey (string) nofulltext
