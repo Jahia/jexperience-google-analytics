@@ -141,16 +141,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Fragment-Host>marketing-factory-core</Fragment-Host>
-                    </instructions>
-                </configuration>
-            </plugin>
-            <plugin>
                 <artifactId>jahia-maven-plugin</artifactId>
                 <groupId>org.jahia.server</groupId>
                 <executions>
@@ -160,6 +150,7 @@
                             <goal>javascript-dictionary</goal>
                         </goals>
                         <configuration>
+                            <targetDirName>marketing-factory/i18n</targetDirName>
                             <dictionaryName>googleanali18n</dictionaryName>
                         </configuration>
                     </execution>
