@@ -150,7 +150,7 @@
                             <goal>javascript-dictionary</goal>
                         </goals>
                         <configuration>
-                            <targetDirName>marketing-factory/i18n</targetDirName>
+                            <targetDirName>javascript/marketing-factory/i18n</targetDirName>
                             <dictionaryName>googleanali18n</dictionaryName>
                         </configuration>
                     </execution>
