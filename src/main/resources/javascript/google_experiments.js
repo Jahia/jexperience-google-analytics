@@ -114,7 +114,7 @@ function jahiaAPIStandardCall(urlContext, workspace, locale, way, endOfURI, meth
  */
 function getVariantFields(variantNode,googleFields){
     if(variantNode !=null && variantNode.properties !=null){
-        //Get At internet attribute from variant node
+        //Get Google attribute from variant node
         if(variantNode.properties['wemgaVariableId'] != undefined){
             googleFields.variant.variableId = parseInt(variantNode.properties['wemgaVariableId'].value);
         }
@@ -129,7 +129,7 @@ function getVariantFields(variantNode,googleFields){
  */
 function getWrapperFields(wrapperNode,googleFields){
     if(wrapperNode  && wrapperNode.properties ){
-        //Get At internet attribute from area node
+        //Get Google attribute from area node
         if(wrapperNode.properties['wemgaExperimentId'] != undefined){
             googleFields.area.experimentId = wrapperNode.properties['wemgaExperimentId'].value;
         }
@@ -149,7 +149,7 @@ function getGoogleFields(data){
         locale : jcrLocale,
         workspace : jcrWorkspace
     };
-    //Get AT internet fields from the sent event data
+    //Get Google fields from the sent event data
     var googleFields = {
         type:data.type,
         area:{
@@ -186,7 +186,7 @@ function getGoogleFields(data){
 }
 
 /**
- * This function push the data contained into the googleFields object directly to AT internet server using the tag Object
+ * This function push the data contained into the googleFields object directly to Google server using the tag Object
  * @param googleFields
  * @param tag
  */
