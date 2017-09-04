@@ -28,7 +28,7 @@
         GNU General Public License for more details.
 
         You should have received a copy of the GNU General Public License
-        along with this program. If not, see <http://www.gnu.org/licenses />.
+        along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
         2/ JSEL - Commercial and Supported Versions of the program
@@ -44,7 +44,10 @@
         please contact the sales department at sales@jahia.com.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>jahia-modules</artifactId>
@@ -54,7 +57,7 @@
     <groupId>org.jahia.modules</groupId>
     <artifactId>mf-google-analytics</artifactId>
     <name>Google Analytics for Marketing Factory</name>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <description>This is the custom module (Google Analytics for Marketing Factory) that will allow you to push your Marketing Factory tests to Google Analytics</description>
 
@@ -62,8 +65,7 @@
         <connection>scm:git:git@github.com:Jahia/mf-google-analytics.git</connection>
         <developerConnection>scm:git:git@github.com:Jahia/mf-google-analytics.git</developerConnection>
         <url>https://github.com/Jahia/mf-google-analytics</url>
-      <tag>HEAD</tag>
-  </scm>
+    </scm>
     <properties>
         <jahia-depends>default,contentRetrieval,marketing-factory-core,jcrestapi, googleAnalytics</jahia-depends>
     </properties>
