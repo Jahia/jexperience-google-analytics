@@ -1,5 +1,5 @@
 <div>
-    <div ng-if="wemgaTrackingCtrl.notTracked">
+    <div ng-if="wemgaTrackingCtrl.displayWarning()">
         <span message-key="wemga.track.warning.label"></span>
     </div>
     <div class="modal-footer profCardButFix" ng-if="wemgaTrackingCtrl.isPublished(wemgaTrackingCtrl.persoObject)">

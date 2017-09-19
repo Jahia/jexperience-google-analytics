@@ -26,11 +26,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
         vm.infoTooltip= i18nService.message('wemga.info.tooltip.label');
         vm.persoObject = JSON.parse($scope.variantsHolder);
         vm.notTracked = false;
-        vm.persoObjectNode = null;
-        jcrService.doGetOnId('default',null,vm.persoObject.nodeIdentifier).then(function(response){
-            vm.persoObjectNode = response.data;
-            vm.buttonLabel = vm.persoObjectNode.mixins.wemgooglemix__experiment?i18nService.message('wemga.button.update.label'):i18nService.message('wemga.button.track.label');
-        });
+
         //This object will be filled with value requested on site node though jcr api
         vm.googleProperties = {};
         //Init google experiment object
@@ -50,17 +46,54 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
             }
         };
 
+
+        vm.persoObjectNode = null;
+        jcrService.doGetOnId('default',null,vm.persoObject.nodeIdentifier).then(function(response){
+            vm.persoObjectNode = response.data;
+            vm.buttonLabel = vm.persoObjectNode.mixins.wemgooglemix__experiment?i18nService.message('wemga.button.update.label'):i18nService.message('wemga.button.track.label');
+        });
+
+        _.each(vm.persoObject.variants,function(variation,index){
+            jcrService.doGetOnId('default',null,variation.nodeIdentifier).then(function(response){
+                var currentVariant = response.data;
+                variation.j__published = currentVariant.properties.j__published.value;
+                if(!currentVariant.mixins.wemgooglemix__variable){
+                    vm.notTracked = true;
+                }
+            });
+        });
+
         //Public functions
         vm.isPublished = isPublished;
         vm.saveGaPerso = saveGaPerso;
+        vm.displayWarning = displayWarning;
+
+
+        /**
+         * This function checks wether the test is an experiment and if all the variants are in the experiment
+         * @param
+         * @returns {boolean}
+         */
+        function displayWarning(){
+            if(vm.persoObjectNode != null && vm.persoObjectNode.mixins.wemgooglemix__experiment){
+                return vm.notTracked;
+            }else{
+                return false;
+            }
+        };
 
         /**
          * This function checks wether an Experiment is published or not
          * @param persoObject
          * @returns {boolean}
          */
-        function isPublished(persoObject){
-            return persoObject.publicationStatus == 'Published';
+        function isPublished(){
+            if(vm.persoObjectNode != null){
+                vm.persoObject.j__published = vm.persoObjectNode.properties.j__published.value;
+                return vm.persoObjectNode.properties.j__published.value;
+            }else{
+                return false;
+            }
         };
 
         /**
@@ -87,16 +120,10 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                     vm.googleExperiment.profileId = vm.googleProperties.googleAnalytics_profileId;
                     //Save the perso as variant if perso is on a page
                     if(vm.persoObjectNode.type == 'jnt:page'){
-                        vm.googleExperiment.resource.variations.push({'name':vm.persoObject.displayableName.length>250?vm.persoObject.displayableName.substring(0,250):vm.persoObject.displayableName,'url':'','status':vm.persoObject.publicationStatus=='Published'?'ACTIVE':'INACTIVE'});
+                        vm.googleExperiment.resource.variations.push({'name':vm.persoObject.displayableName.length>250?vm.persoObject.displayableName.substring(0,250):vm.persoObject.displayableName,'url':'','status':vm.persoObject.j__published?'ACTIVE':'INACTIVE'});
                     }
                     _.each(vm.persoObject.variants,function(variation,index){
-                        jcrService.doGetOnId('default',null,variation.nodeIdentifier).then(function(response){
-                            var currentVariant = response.data;
-                            if(!currentVariant.mixins.wemgooglemix__variable){
-                                vm.notTracked = true;
-                            }
-                        });
-                        vm.googleExperiment.resource.variations.push({'name':variation.name.length>250?variation.name.substring(0,250):variation.name,'url':'','status':variation.publicationStatus=='Published'?'ACTIVE':'INACTIVE'});
+                        vm.googleExperiment.resource.variations.push({'name':variation.name.length>250?variation.name.substring(0,250):variation.name,'url':'','status':variation.j__published?'ACTIVE':'INACTIVE'});
                     });
                     //Save Experiment in google Analytics
                     //Init google api connexion
