@@ -56,7 +56,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
         _.each(vm.persoObject.variants,function(variation,index){
             jcrService.doGetOnId('default',null,variation.nodeIdentifier).then(function(response){
                 var currentVariant = response.data;
-                variation.j__published = currentVariant.properties.j__published.value;
+                variation.j__published = currentVariant.properties.j__published?currentVariant.properties.j__published.value:false;
                 if(!currentVariant.mixins.wemgooglemix__variable){
                     vm.notTracked = true;
                 }
