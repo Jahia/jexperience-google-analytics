@@ -3,12 +3,14 @@ package org.jahia.modules.mfgoogleanalytics.filters;
 import net.htmlparser.jericho.*;
 import org.apache.commons.lang.StringUtils;
 import org.jahia.api.Constants;
+import org.jahia.data.templates.JahiaTemplatesPackage;
 import org.jahia.services.content.JCRSessionWrapper;
 import org.jahia.services.render.RenderContext;
 import org.jahia.services.render.Resource;
 import org.jahia.services.render.filter.AbstractFilter;
 import org.jahia.services.render.filter.RenderChain;
 import org.jahia.services.render.filter.cache.AggregateCacheFilter;
+import org.jahia.services.templates.JahiaModuleAware;
 import org.jahia.services.templates.JahiaTemplateManagerService;
 import org.jahia.utils.ScriptEngineUtils;
 import org.jahia.utils.WebUtils;
@@ -18,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 
+import javax.jcr.RepositoryException;
 import javax.script.Bindings;
 import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
@@ -31,7 +34,7 @@ import java.util.List;
 /**
  * Created by rahmed on 03/08/17.
  */
-public class SendExperimentsFilter extends AbstractFilter implements ApplicationListener<ApplicationEvent> {
+public class SendExperimentsFilter extends AbstractFilter implements ApplicationListener<ApplicationEvent>, JahiaModuleAware {
 
     private static Logger logger = LoggerFactory.getLogger(SendExperimentsFilter.class);
 
@@ -39,9 +42,25 @@ public class SendExperimentsFilter extends AbstractFilter implements Application
 
     private String template;
 
+    private JahiaTemplatesPackage module;
+
     private String resolvedTemplate;
 
-    private BundleContext bundleContext;
+    public SendExperimentsFilter() {
+        //Execute filter only if module is enabled on the site
+        addCondition(new ExecutionCondition() {
+            @Override
+            public boolean matches(RenderContext renderContext, Resource resource) {
+                try {
+                    List<String> installedBundles = resource.getNode().getResolveSite().getInstalledModules();
+                    return installedBundles.contains(module.getBundle().getSymbolicName());
+                } catch (RepositoryException e) {
+                    logger.error("Error when execute filter condition", e);
+                }
+                return false;
+            }
+        });
+    }
 
     @Override
     public String execute(String previousOut, RenderContext renderContext, Resource resource, RenderChain chain) throws Exception {
@@ -112,6 +131,13 @@ public class SendExperimentsFilter extends AbstractFilter implements Application
 
     public void setTemplate(String template) {
         this.template = template;
+    }
+
+    @Override
+    public void setJahiaModule(JahiaTemplatesPackage jahiaTemplatesPackage) {
+
+        this.module = jahiaTemplatesPackage;
+
     }
 
     protected static class GoogleScriptContext extends SimpleScriptContext {
