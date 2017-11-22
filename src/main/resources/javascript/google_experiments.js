@@ -218,11 +218,17 @@ function sendFeedToGoogle(googleFields){
             }
         }
     }
-    //Sending an event that will carry the mv/test
-    ga('send', 'event', googleFields.type, 'Display', googleFields.area.name+'-'+googleFields.variant.name, 5, true);
+
+    //Make sure GA module is set
+    if(typeof ga !== 'undefined') {
+        //Sending an event that will carry the mv/test
+        ga('send', 'event', googleFields.type, 'Display', googleFields.area.name+'-'+googleFields.variant.name, 5, true);
+    }
 }
 // Listen for the event.\n" +
 document.addEventListener('displayWemVariant', function (e) {
     var data = e.detail;
-    getGoogleFields(data);
+    if(data != undefined) {
+        getGoogleFields(data);
+    }
 }, true);
