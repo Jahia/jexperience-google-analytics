@@ -16,13 +16,6 @@
  - wemgaVariableId (long)
  - wemgaVariableName (string)
 
-[wemgoogle:settings] > jnt:content, jmix:multimediaContent, jmix:hiddenType
-
-[wemgoogle:configuration] > jnt:content, jmix:multimediaContent
- - autofill (boolean) = true autocreated
- - inserttag (boolean) = true autocreated
-
-
 [jmix:googleAnalyticsExperiment] mixin
  extends=jnt:virtualsite
  itemtype=options

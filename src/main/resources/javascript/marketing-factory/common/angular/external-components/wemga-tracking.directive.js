@@ -184,21 +184,29 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                         notificationService.errorToast(reason.details);
                     } else {
                         loadingSpinnerService.hide();
-                        notificationService.errorToast("Google services technical connection issue.");
+                        notificationService.errorToast("Google services technical connection issue!");
                     }
                 }
                 if(reason.result && reason.result.error){
                     if(reason.result.error.code && reason.result.error.code == 401){
-                        console.error('wemga-tracking.directive.js - Not connected to google services handling sign in');
-                        return _handleGoogleSignIn().then(function(){_saveExperiment();});
+                        console.error('wemga-tracking.directive.js - Not connected to google services handling sign in!');
+                        return _handleGoogleSignIn().then(
+                            function(){
+                                _saveExperiment();
+                            },
+                            function(){
+                                loadingSpinnerService.hide();
+                                notificationService.errorToast("Error Google sign in!");
+                            }
+                        );
                     } else {
                         loadingSpinnerService.hide();
-                        notificationService.errorToast("Google services technical connection issue.");
+                        notificationService.errorToast("Google services technical connection issue!");
                     }
                 }
                 else{
                     loadingSpinnerService.hide();
-                    notificationService.errorToast("Google services technical connection issue.");
+                    notificationService.errorToast("Google services technical connection issue!");
                 }
             });
         };
@@ -228,7 +236,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                         notificationService.errorToast('Google analytics error : '+response.message);
                     } else {
                         loadingSpinnerService.hide();
-                        notificationService.successToast('Updated successfully to Google analytics');
+                        notificationService.successToast('Updated successfully to Google analytics.');
                     }
                 });
             } else {

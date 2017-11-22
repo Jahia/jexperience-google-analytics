@@ -65,7 +65,7 @@
       <tag>HEAD</tag>
   </scm>
     <properties>
-        <jahia-depends>default,contentRetrieval,marketing-factory-core,jcrestapi, googleAnalytics</jahia-depends>
+        <jahia-depends>default,contentRetrieval,marketing-factory-core,jcrestapi,googleAnalytics</jahia-depends>
     </properties>
     <dependencies>
         <dependency>
@@ -102,41 +102,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.4</version>
-                <executions>
-                    <execution>
-                        <id>npm install node and npm</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
-                        <configuration>
-                            <nodeVersion>v6.11.1</nodeVersion>
-                            <npmVersion>5.3.0</npmVersion>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>npm install</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>gulp</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>gulp</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>default</arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <artifactId>jahia-maven-plugin</artifactId>
                 <groupId>org.jahia.server</groupId>
