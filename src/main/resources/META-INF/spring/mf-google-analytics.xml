@@ -10,7 +10,7 @@
     </bean>
     <bean class="org.jahia.modules.mfgoogleanalytics.filters.SendExperimentsFilter">
         <property name="applyOnConfigurations" value="page" />
-        <property name="skipOnConfiguration" value="include,wrapper" />
+        <property name="skipOnConfigurations" value="include,wrapper" />
         <property name="applyOnModes" value="live" />
         <property name="priority" value="3" />
         <property name="scriptEngineUtils" ref="scriptEngineUtils"/>
