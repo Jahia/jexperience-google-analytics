@@ -130,7 +130,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                     _google_authorize();
                 } else {
                     loadingSpinnerService.hide();
-                    notificationService.errorToast("Please provide google api key and client id in your site options");
+                    notificationService.errorToast(i18nService.message("wemga.error.missing.api.key"));
                 }
             });
         }
@@ -184,7 +184,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                         notificationService.errorToast(reason.details);
                     } else {
                         loadingSpinnerService.hide();
-                        notificationService.errorToast("Google services technical connection issue!");
+                        notificationService.errorToast(i18nService.message("wemga.error.missing.technical.issue"));
                     }
                 }
                 if(reason.result && reason.result.error){
@@ -196,17 +196,17 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                             },
                             function(){
                                 loadingSpinnerService.hide();
-                                notificationService.errorToast("Error Google sign in!");
+                                notificationService.errorToast(i18nService.message("wemga.error.signin"));
                             }
                         );
                     } else {
                         loadingSpinnerService.hide();
-                        notificationService.errorToast("Google services technical connection issue!");
+                        notificationService.errorToast(i18nService.message("wemga.error.missing.technical.issue"));
                     }
                 }
                 else{
                     loadingSpinnerService.hide();
-                    notificationService.errorToast("Google services technical connection issue!");
+                    notificationService.errorToast(i18nService.message("wemga.error.missing.technical.issue"));
                 }
             });
         };
@@ -236,7 +236,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                         notificationService.errorToast('Google analytics error : '+response.message);
                     } else {
                         loadingSpinnerService.hide();
-                        notificationService.successToast('Updated successfully to Google analytics.');
+                        notificationService.successToast(i18nService.message("wemga.info.missing.update.successful"));
                     }
                 });
             } else {
@@ -266,7 +266,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
                                         $http.post(ManagersContext.baseEdit + ManagersContext.currentSitePath + ".publishNodeAction.do?nodesid="+nodesId, {nodesIdobject:nodesId}).then(function(then_response){
                                             loadingSpinnerService.hide();
                                             vm.buttonLabel = i18nService.message('wemga.button.update.label');
-                                            notificationService.successToast('Saved successfully to Google analytics');
+                                            notificationService.successToast(i18nService.message("wemga.info.missing.save.successful"));
                                         });
                                     } else {
                                         var_index++;
