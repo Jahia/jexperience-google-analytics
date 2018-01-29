@@ -98,6 +98,19 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>marketing-factory</id>
+            <name>Marketing Factory Group</name>
+            <url>https://devtools.jahia.com/nexus/content/groups/marketing-factory-group/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
     </repositories>
 
     <build>
