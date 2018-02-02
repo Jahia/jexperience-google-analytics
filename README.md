@@ -79,9 +79,9 @@ What will the events look like ?
 
 A Google analytics event is defined by 4 fields : 
 
-1) Event Category : this field will be set automaticaaly by Marketing Factory to : personalization/optimization/page_personalization/page_optimization
+1) Event Category : this field will be set automatically by Marketing Factory to : personalization/optimization/page_personalization/page_optimization
 2) Event Action : This field will automatically be set to "Display"
-3) Event Label : This field will automaticall be set to <Test Displayabel Name>-<Variant Displayable Name>
+3) Event Label : This field will automatically be set to <Test Displayable Name>-<Variant Displayable Name>
 
 What will the experiments look like ?
 -
