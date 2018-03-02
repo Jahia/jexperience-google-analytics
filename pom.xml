@@ -54,7 +54,7 @@
 
     <artifactId>mf-google-analytics</artifactId>
     <name>Google Analytics for Marketing Factory</name>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <packaging>bundle</packaging>
     <description>This is the custom module (Google Analytics for Marketing Factory) that will allow you to push your Marketing Factory tests to Google Analytics</description>
 
@@ -62,7 +62,7 @@
         <connection>scm:git:git@github.com:Jahia/mf-google-analytics.git</connection>
         <developerConnection>scm:git:git@github.com:Jahia/mf-google-analytics.git</developerConnection>
         <url>https://github.com/Jahia/mf-google-analytics</url>
-      <tag>HEAD</tag>
+      <tag>1_0_1</tag>
     </scm>
 
     <properties>
