@@ -91,11 +91,11 @@ function ajax(options) {
  */
 function jahiaAPIStandardCall(urlContext, workspace, locale, way, endOfURI, method, jsonData, successCallback, errorCallback) {
     ajax({
-        url: urlContext + "/modules/api/jcr/v1/" + workspace + "/" + locale + "/" + way + (way === "paths" ? "" : "/") + endOfURI,
+        url: urlContext + '/modules/api/jcr/v1/' + workspace + '/' + locale + '/' + way + (way === 'paths' ? '' : '/') + endOfURI,
         type: method,
         async: true,
-        contentType: "application/hal+json",
-        responseType: "text",
+        contentType: 'application/hal+json',
+        responseType: 'text',
         jsonData: jsonData,
         dataType: 'text/html,application/xhtml+xml,application/json,application/xml;q=0.9,image/webp,*/*;q=0.8',
         success: successCallback,
@@ -108,7 +108,7 @@ function jahiaAPIStandardCall(urlContext, workspace, locale, way, endOfURI, meth
  * @param variantNode
  * @param googleFields
  */
-function getVariantFields(variantNode, googleFields){
+function getVariantFields(variantNode, googleFields) {
     if (variantNode && variantNode.properties) {
         // Get Google attribute from variant node
         if (variantNode.properties['wemgaVariableId']) {
@@ -150,34 +150,34 @@ function getGoogleFields(variantInfo) {
         area: {
             experimentId: null,
             jcrId: null,
-            name: variantInfo.wrapper.displayableName.trim().substring(0,65)
+            name: variantInfo.wrapper.displayableName.trim().substring(0, 65)
         },
         variant: {
             variableId: null,
             jcrId: null,
-            name: variantInfo.displayableName.trim().substring(0,65)
+            name: variantInfo.displayableName.trim().substring(0, 65)
         }
     };
 
     // Get variant node from path in JCR
-    jahiaAPIStandardCall(jcrParameters.context, jcrParameters.workspace, jcrParameters.locale, "nodes", variantInfo.id, "GET", {}, function(variantXhr) {
+    jahiaAPIStandardCall(jcrParameters.context, jcrParameters.workspace, jcrParameters.locale, 'nodes', variantInfo.id, 'GET', {}, function (variantXhr) {
         var variantJcrNode = JSON.parse(variantXhr.responseText);
-        getVariantFields(variantJcrNode,googleFields);
+        getVariantFields(variantJcrNode, googleFields);
         if (variantInfo.id !== variantInfo.wrapper.id) {
             // Get Area node from path in JCR
-            jahiaAPIStandardCall(jcrParameters.context, jcrParameters.workspace, jcrParameters.locale, "nodes", variantInfo.wrapper.id, "GET", {}, function(wrapperXhr) {
+            jahiaAPIStandardCall(jcrParameters.context, jcrParameters.workspace, jcrParameters.locale, 'nodes', variantInfo.wrapper.id, 'GET', {}, function (wrapperXhr) {
                 var wrapperJcrNode = JSON.parse(wrapperXhr.responseText);
                 getWrapperFields(wrapperJcrNode, googleFields);
                 sendFeedToGoogle(googleFields);
-            }, function() {
-                console.warn("googleVariants.js - Error when getting Area node, the page will be pushed without mv test")
+            }, function () {
+                console.warn('googleVariants.js - Error when getting Area node, the page will be pushed without mv test');
             });
         } else {
             getWrapperFields(variantJcrNode, googleFields);
             sendFeedToGoogle(googleFields);
         }
-    }, function() {
-        console.warn("googleVariants.js - Error when getting Variant node, the page will be pushed without mv test");
+    }, function () {
+        console.warn('googleVariants.js - Error when getting Variant node, the page will be pushed without mv test');
     });
 
 }
@@ -195,9 +195,8 @@ function sendFeedToGoogle(googleFields) {
         if (googleFields.variant.variableId) {
             ga('set', 'expVar', googleFields.variant.variableId);
         }
-    }
-    else {
-        var ids = "";
+    } else {
+        var ids = '';
         if (googleFields.area) {
             if (googleFields.area.experimentId) {
                 ids += googleFields.area.experimentId;
@@ -208,9 +207,9 @@ function sendFeedToGoogle(googleFields) {
         }
         if (ids.length > 0) {
             if (!googleFields.area.experimentId) {
-                console.warn("googleVariants.js - No experiment id defined, the "+googleFields.type+" will be pushed without mv test");
+                console.warn('googleVariants.js - No experiment id defined, the ' + googleFields.type + ' will be pushed without mv test');
             } else {
-                console.warn("googleVariants.js - No variable id defined, the "+googleFields.type+" will be pushed without mv test");
+                console.warn('googleVariants.js - No variable id defined, the ' + googleFields.type + ' will be pushed without mv test');
             }
         }
     }
