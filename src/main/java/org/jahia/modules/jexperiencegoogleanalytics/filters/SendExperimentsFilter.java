@@ -156,7 +156,7 @@ public class SendExperimentsFilter extends AbstractFilter implements Application
                 logger.warn("Unable to lookup template at {}", template);
             }
         }
-        //getTemplatePackageById("marketing-factory-core").getResource("/META-INF/scripts/wemContextServer.groovy")
+
         return resolvedTemplate;
     }
 
