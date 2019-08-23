@@ -44,7 +44,8 @@
         please contact the sales department at sales@jahia.com.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>jahia-modules</artifactId>
@@ -53,10 +54,12 @@
     </parent>
 
     <artifactId>mf-google-analytics</artifactId>
-    <name>Google Analytics for Marketing Factory</name>
-    <version>1.0.2-SNAPSHOT</version>
+    <name>Google Analytics for jExperience</name>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
-    <description>This is the custom module (Google Analytics for Marketing Factory) that will allow you to push your Marketing Factory tests to Google Analytics</description>
+    <description>This is the custom module (Google Analytics for jExperience) that will allow you to push your
+        jExperience tests to Google Analytics
+    </description>
 
     <scm>
         <connection>scm:git:git@github.com:Jahia/mf-google-analytics.git</connection>
@@ -66,14 +69,14 @@
     </scm>
 
     <properties>
-        <jahia-depends>default,contentRetrieval,marketing-factory-core,jcrestapi,googleAnalytics</jahia-depends>
+        <jahia-depends>default,contentRetrieval,jexperience,jcrestapi,googleAnalytics</jahia-depends>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.jahia.modules</groupId>
-            <artifactId>marketing-factory-core</artifactId>
-            <version>1.8.2</version>
+            <artifactId>jexperience</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -129,7 +132,7 @@
                             <goal>javascript-dictionary</goal>
                         </goals>
                         <configuration>
-                            <targetDirName>javascript/marketing-factory/i18n</targetDirName>
+                            <targetDirName>javascript/jexperience/i18n</targetDirName>
                             <dictionaryName>googleanali18n</dictionaryName>
                         </configuration>
                     </execution>

@@ -1,4 +1,4 @@
-Google Analytics for marketing factory 
+Google Analytics for jExperience 
 =
 
 This project contains all the specific code in order to push data from your MF tests directly in google Analytics as events or Experiments.
@@ -21,7 +21,7 @@ Once your module is deployed on a site you can start configure Google analytics 
 Prerequisite
 -
 In order for this module to be started, you need to have :
-- Marketing Factory 1.7.1+ (set personalizations and optimisations in your site)
+- jExperience 1.7.1+ (set personalizations and optimisations in your site)
 - Google Analytics 2.0.3+ modules installed on your server. (Inject google analytics tag in pages and send pageviews)
  
 
@@ -32,9 +32,9 @@ two google Analytics Sections :
 
 - The first section (Google Analytics site settings) comes from Google Analytics module and allow you to precise your web property id or 
   Google Analytics site ID (UA-XXXXXXX-XX) used to load google analytics script on page and enables pageviews 
-  and Marketing Factory events push.
+  and jExperience events push.
 
-- The second section (Google Experiments Options) comes from Google Analytics for marketing Factory and allows you to 
+- The second section (Google Experiments Options) comes from Google Analytics for jExperience and allows you to 
   precise the needed parameters to create experiments from your tests:
   - Account ID (XXXXXXXX) : Your google analytics account ID
   - Profile ID (XXXXXXXXX) : The profile you want to use to create experiments
@@ -47,7 +47,7 @@ Create Experiments from your tests
 -
 In order to push your personalizations or optimizations as Experiments in Google analytics you first need to declare them as experiments.
 
-As soon as the Google Analytics for Marketing Factory module is deployed on your site, you can go to the Personalization/Optimisation Dashboards
+As soon as the Google Analytics for jExperience module is deployed on your site, you can go to the Personalization/Optimisation Dashboards
 and open any test you want, you will see a "Track as Experiment" button that will allows you to create an Experiment from the test.
 
 Remark : Only the published Tests and variants can be used to create an experiment. 
@@ -61,7 +61,7 @@ What happens now ?
 
 Once you have set the Google analytics settings, your site will push data to Google servers :
 - For each page load in live mode (Google Analytics module).
-- For each Marketing Factory test (Google Analytics for Marketing Factory module)
+- For each jExperience test (Google Analytics for jExperience module)
 
 The files are injected in your page by a render filter.
 
@@ -79,13 +79,13 @@ What will the events look like ?
 
 A Google analytics event is defined by 4 fields : 
 
-1) Event Category : this field will be set automatically by Marketing Factory to : personalization/optimization/page_personalization/page_optimization
+1) Event Category : this field will be set automatically by jExperience to : personalization/optimization/page_personalization/page_optimization
 2) Event Action : This field will automatically be set to "Display"
 3) Event Label : This field will automatically be set to <Test Displayable Name>-<Variant Displayable Name>
 
 What will the experiments look like ?
 -
-In order to push Experiments Marketing Factory prefill the Google Experiment Object using the following values :
+In order to push Experiments jExperience prefill the Google Experiment Object using the following values :
 ```
 {
     'accountId': <Your Account ID>,

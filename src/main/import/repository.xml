@@ -5,7 +5,7 @@
                            j:installedModules="mf-google-analytics"
                            j:modulePriority="0"
                            j:moduleType="module"
-                           j:title="Jahia Marketing Factory Google Analytics"
+                           j:title="Jahia jExperience Google Analytics"
                            jcr:primaryType="jnt:module">
 
                 <portlets jcr:primaryType="jnt:portletFolder"/>
