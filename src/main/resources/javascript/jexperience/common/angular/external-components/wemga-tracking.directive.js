@@ -8,7 +8,7 @@ var GOOGLE_API_SCOPE = 'https://www.googleapis.com/auth/analytics https://www.go
     function wemGoogle() {
         return {
             restrict: 'E',
-            templateUrl: ManagersContext.cmsContext + '/modules/mf-google-analytics/javascript/jexperience/common/angular/external-components/wemga-tracking.directive.html',
+            templateUrl: ManagersContext.cmsContext + '/modules/jexperience-google-analytics/javascript/jexperience/common/angular/external-components/wemga-tracking.directive.html',
             controller: wemGoogleController,
             controllerAs: 'wemgaTrackingCtrl',
             scope: {

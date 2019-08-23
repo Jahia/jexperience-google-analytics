@@ -53,7 +53,7 @@
         <version>7.1.1.0</version>
     </parent>
 
-    <artifactId>mf-google-analytics</artifactId>
+    <artifactId>jexperience-google-analytics</artifactId>
     <name>Google Analytics for jExperience</name>
     <version>2.0.0-SNAPSHOT</version>
     <packaging>bundle</packaging>

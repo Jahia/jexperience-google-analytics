@@ -1,4 +1,4 @@
-package org.jahia.modules.mfgoogleanalytics.rules
+package org.jahia.modules.jexperiencegoogleanalytics.rules
 
 // list any import classes here.
 import org.jahia.services.content.rules.*

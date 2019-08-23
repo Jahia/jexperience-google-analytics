@@ -4,16 +4,16 @@
        xmlns:osgi="http://www.springframework.org/schema/osgi"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                            http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
-    <bean id="publishNodeAction" class="org.jahia.modules.mfgoogleanalytics.actions.PublishNode">
+    <bean id="publishNodeAction" class="org.jahia.modules.jexperiencegoogleanalytics.actions.PublishNode">
         <property name="name" value="publishNodeAction"/>
         <property name="requiredPermission" value="canAccessJExperience"/>
     </bean>
-    <bean class="org.jahia.modules.mfgoogleanalytics.filters.SendExperimentsFilter">
+    <bean class="org.jahia.modules.jexperiencegoogleanalytics.filters.SendExperimentsFilter">
         <property name="applyOnConfigurations" value="page" />
         <property name="skipOnConfigurations" value="include,wrapper" />
         <property name="applyOnModes" value="live" />
         <property name="priority" value="3" />
         <property name="scriptEngineUtils" ref="scriptEngineUtils"/>
-        <property name="template" value="${mfGoogleAnalyticsTemplate:/modules/mf-google-analytics/WEB-INF/scripts/send_experiments.groovy}"/>
+        <property name="template" value="${jexperienceGoogleAnalyticsTemplate:/modules/jexperience-google-analytics/WEB-INF/scripts/send_experiments.groovy}"/>
     </bean>
 </beans>

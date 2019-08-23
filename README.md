@@ -1,7 +1,7 @@
 Google Analytics for jExperience 
 =
 
-This project contains all the specific code in order to push data from your MF tests directly in google Analytics as events or Experiments.
+This project contains all the specific code in order to push data from your jExperience tests directly in google Analytics as events or Experiments.
 
 Build and deploy
 -

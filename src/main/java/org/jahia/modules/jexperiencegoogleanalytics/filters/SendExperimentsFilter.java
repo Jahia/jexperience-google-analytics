@@ -41,7 +41,7 @@
  *     If you are unsure which license is appropriate for your use,
  *     please contact the sales department at sales@jahia.com.
  */
-package org.jahia.modules.mfgoogleanalytics.filters;
+package org.jahia.modules.jexperiencegoogleanalytics.filters;
 
 import net.htmlparser.jericho.*;
 import org.apache.commons.lang.StringUtils;
@@ -110,7 +110,7 @@ public class SendExperimentsFilter extends AbstractFilter implements Application
         JCRSessionWrapper session = resource.getNode().getSession();
         String script = getResolvedTemplate();
         if (script != null) {
-            String scriptUrl = renderContext.getURLGenerator().getContext() + "/modules/mf-google-analytics/javascript/google_experiments.js";
+            String scriptUrl = renderContext.getURLGenerator().getContext() + "/modules/jexperience-google-analytics/javascript/google_experiments.js";
             Source source = new Source(previousOut);
             OutputDocument outputDocument = new OutputDocument(source);
             List<Element> headElementList = source.getAllElements(HTMLElementName.HEAD);
