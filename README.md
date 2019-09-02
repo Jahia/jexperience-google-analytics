@@ -21,7 +21,7 @@ Once your module is deployed on a site you can start configure Google analytics 
 Prerequisite
 -
 In order for this module to be started, you need to have :
-- jExperience 2.0.0+ (set personalizations and optimisations in your site)
+- jExperience 1.11.0+ (set personalizations and optimisations in your site)
 - Google Analytics 2.0.3+ modules installed on your server. (Inject google analytics tag in pages and send pageviews)
  
 
