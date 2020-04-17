@@ -7,7 +7,7 @@
 
                                     http://www.jahia.com
 
-        Copyright (C) 2002-2019 Jahia Solutions Group SA. All rights reserved.
+        Copyright (C) 2002-2020 Jahia Solutions Group SA. All rights reserved.
 
         THIS FILE IS AVAILABLE UNDER TWO DIFFERENT LICENSES:
         1/GPL OR 2/JSEL
@@ -50,7 +50,7 @@
     <parent>
         <artifactId>jahia-modules</artifactId>
         <groupId>org.jahia.modules</groupId>
-        <version>7.1.1.0</version>
+        <version>7.5.0.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>jexperience-google-analytics</artifactId>
@@ -69,6 +69,7 @@
     </scm>
 
     <properties>
+        <jahia-module-signature>MCwCFEWxbv7e2jMxbl7Rf2uR/EeltEA4AhRYWmzx5HTXfhKhxxLmgEsxcGy7JA==</jahia-module-signature>
         <jahia-depends>default,contentRetrieval,jexperience,jcrestapi,googleAnalytics</jahia-depends>
     </properties>
 
@@ -122,6 +123,18 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Require-Capability>
+                            osgi.extender;filter:="(osgi.extender=org.jahia.bundles.blueprint.extender.config)"
+                        </Require-Capability>
+                    </instructions>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>jahia-maven-plugin</artifactId>
                 <groupId>org.jahia.server</groupId>
