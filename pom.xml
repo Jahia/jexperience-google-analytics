@@ -54,7 +54,7 @@
 
     <artifactId>jexperience-google-analytics</artifactId>
     <name>Google Analytics for jExperience</name>
-    <version>1.12.1-SNAPSHOT</version>
+    <version>1.13.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <description>This is the custom module (Google Analytics for jExperience) that will allow you to push your
         jExperience tests to Google Analytics
@@ -68,7 +68,7 @@
     </scm>
 
     <properties>
-        <jahia-module-signature>MCwCFEWxbv7e2jMxbl7Rf2uR/EeltEA4AhRYWmzx5HTXfhKhxxLmgEsxcGy7JA==</jahia-module-signature>
+        <jahia-module-signature>MCwCFHVgtHcU/ogAWFnLM/FT0kZrLfGCAhQ2nJyBFl7jkn3B5XU1lJ3IgBiZIg==</jahia-module-signature>
         <jahia-depends>default,contentRetrieval,jexperience,jcrestapi,googleAnalytics</jahia-depends>
     </properties>
 
