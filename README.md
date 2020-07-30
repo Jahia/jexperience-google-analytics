@@ -1,5 +1,9 @@
+<a href="https://www.jahia.com/">
+    <img src="https://www.jahia.com/modules/jahiacom-templates/images/jahia-3x.png" alt="Jahia logo" title="Jahia" align="right" height="60" />
+</a>
+
 Google Analytics for jExperience 
-=
+======================
 
 This project contains all the specific code in order to push data from your jExperience tests directly in google Analytics as events or Experiments.
 
@@ -116,3 +120,7 @@ Any limitation ?
 -
 Besides the limitation of your Google account (access to the different features and plugins as AB testing for example), you will have some technical limitations : 
 For example if some web browsers block Google script when they are opened in private mode or using adblockers or tracking blockers.
+
+## Open-Source
+
+This is an Open-Source module, you can find more details about Open-Source @ Jahia [in this repository](https://github.com/Jahia/open-source).
