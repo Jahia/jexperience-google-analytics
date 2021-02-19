@@ -69,7 +69,7 @@
 
     <properties>
         <jahia-module-signature>MCwCFCBs5lub96gXVz6dKIN0RUA1X2+HAhQuKsvtbw8x8VY4b1bhVvjRrwTglw==</jahia-module-signature>
-        <jahia-depends>default,contentRetrieval,jexperience,googleAnalytics</jahia-depends>
+        <jahia-depends>default,jexperience,googleAnalytics</jahia-depends>
     </properties>
 
     <dependencies>
