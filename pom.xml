@@ -44,99 +44,96 @@
         please contact the sales department at sales@jahia.com.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <artifactId>jahia-modules</artifactId>
-        <groupId>org.jahia.modules</groupId>
-        <version>7.1.1.0</version>
-    </parent>
-
-    <artifactId>jexperience-google-analytics</artifactId>
-    <name>Google Analytics for jExperience</name>
-    <version>1.11.1-SNAPSHOT</version>
-    <packaging>bundle</packaging>
-    <description>This is the custom module (Google Analytics for jExperience) that will allow you to push your
-        jExperience tests to Google Analytics
-    </description>
-
-    <scm>
-        <connection>scm:git:git@github.com:Jahia/jexperience-google-analytics.git</connection>
-        <developerConnection>scm:git:git@github.com:Jahia/jexperience-google-analytics.git</developerConnection>
-        <url>https://github.com/Jahia/jexperience-google-analytics</url>
-        <tag>HEAD</tag>
-    </scm>
-
-    <properties>
-        <jahia-depends>default,contentRetrieval,jexperience,jcrestapi,googleAnalytics</jahia-depends>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.jahia.modules</groupId>
-            <artifactId>jexperience</artifactId>
-            <version>1.11.0</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-
-    <distributionManagement>
-        <repository>
-            <id>jahia-enterprise-releases</id>
-            <url>https://devtools.jahia.com/nexus/content/repositories/marketing-factory-releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>jahia-enterprise-snapshots</id>
-            <url>https://devtools.jahia.com/nexus/content/repositories/marketing-factory-snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
-
-    <repositories>
-        <repository>
-            <id>jahia-public</id>
-            <name>Jahia Public Repository</name>
-            <url>https://devtools.jahia.com/nexus/content/groups/public</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>marketing-factory</id>
-            <name>Marketing Factory Group</name>
-            <url>https://devtools.jahia.com/nexus/content/groups/marketing-factory-group/</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>jahia-maven-plugin</artifactId>
-                <groupId>org.jahia.server</groupId>
-                <executions>
-                    <execution>
-                        <id>i18n2js</id>
-                        <goals>
-                            <goal>javascript-dictionary</goal>
-                        </goals>
-                        <configuration>
-                            <targetDirName>javascript/jexperience/i18n</targetDirName>
-                            <dictionaryName>googleanali18n</dictionaryName>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.jahia.modules</groupId>
+    <artifactId>jahia-modules</artifactId>
+    <version>7.1.1.0</version>
+  </parent>
+  <artifactId>jexperience-google-analytics</artifactId>
+  <version>1.11.1-SNAPSHOT</version>
+  <packaging>bundle</packaging>
+  <name>Google Analytics for jExperience</name>
+  <description>This is the custom module (Google Analytics for jExperience) that will allow you to push your
+        jExperience optimization tests and personalization as events to Google Analytics.</description>
+  <scm>
+    <connection>scm:git:git@github.com:Jahia/jexperience-google-analytics.git</connection>
+    <developerConnection>scm:git:git@github.com:Jahia/jexperience-google-analytics.git</developerConnection>
+    <url>https://github.com/Jahia/jexperience-google-analytics</url>
+  </scm>
+  <distributionManagement>
+    <repository>
+      <id>jahia-enterprise-releases</id>
+      <url>https://devtools.jahia.com/nexus/content/repositories/marketing-factory-releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>jahia-enterprise-snapshots</id>
+      <url>https://devtools.jahia.com/nexus/content/repositories/marketing-factory-snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <properties>
+    <jahia-depends>default,jexperience,googleAnalytics,contentRetrieval,jcrestapi</jahia-depends>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.jahia.modules</groupId>
+      <artifactId>jexperience</artifactId>
+      <version>1.11.0</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  <repositories>
+    <repository>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>jahia-public</id>
+      <name>Jahia Public Repository</name>
+      <url>https://devtools.jahia.com/nexus/content/groups/public</url>
+    </repository>
+    <repository>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+      <id>marketing-factory</id>
+      <name>Marketing Factory Group</name>
+      <url>https://devtools.jahia.com/nexus/content/groups/marketing-factory-group/</url>
+    </repository>
+  </repositories>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jahia.server</groupId>
+        <artifactId>jahia-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>i18n2js</id>
+            <goals>
+              <goal>javascript-dictionary</goal>
+            </goals>
+            <configuration>
+              <targetDirName>javascript/jexperience/i18n</targetDirName>
+              <dictionaryName>googleanali18n</dictionaryName>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
