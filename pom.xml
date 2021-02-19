@@ -57,7 +57,7 @@
     <version>2.0.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <description>This is the custom module (Google Analytics for jExperience) that will allow you to push your
-        jExperience tests to Google Analytics
+        jExperience optimization tests and personalization as events to Google Analytics.
     </description>
 
     <scm>
@@ -69,7 +69,7 @@
 
     <properties>
         <jahia-module-signature>MCwCFCBs5lub96gXVz6dKIN0RUA1X2+HAhQuKsvtbw8x8VY4b1bhVvjRrwTglw==</jahia-module-signature>
-        <jahia-depends>default,contentRetrieval,jexperience,jcrestapi,googleAnalytics</jahia-depends>
+        <jahia-depends>default,jexperience,googleAnalytics</jahia-depends>
     </properties>
 
     <dependencies>
@@ -133,22 +133,6 @@
                         </Require-Capability>
                     </instructions>
                 </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>jahia-maven-plugin</artifactId>
-                <groupId>org.jahia.server</groupId>
-                <executions>
-                    <execution>
-                        <id>i18n2js</id>
-                        <goals>
-                            <goal>javascript-dictionary</goal>
-                        </goals>
-                        <configuration>
-                            <targetDirName>javascript/jexperience/i18n</targetDirName>
-                            <dictionaryName>googleanali18n</dictionaryName>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
