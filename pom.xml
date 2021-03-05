@@ -68,6 +68,7 @@
     </scm>
 
     <properties>
+        <jahia.nexus.staging.repository.id>1b7030912bcbea1</jahia.nexus.staging.repository.id>
         <jahia-module-signature>MCwCFCBs5lub96gXVz6dKIN0RUA1X2+HAhQuKsvtbw8x8VY4b1bhVvjRrwTglw==</jahia-module-signature>
         <jahia-depends>default,jexperience,googleAnalytics</jahia-depends>
     </properties>
