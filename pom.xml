@@ -84,11 +84,11 @@
 
     <distributionManagement>
         <repository>
-            <id>marketing-factory--releases</id>
+            <id>marketing-factory-releases</id>
             <url>https://devtools.jahia.com/nexus/content/repositories/marketing-factory-releases</url>
         </repository>
         <snapshotRepository>
-            <id>marketing-factory--snapshots</id>
+            <id>marketing-factory-snapshots</id>
             <url>https://devtools.jahia.com/nexus/content/repositories/marketing-factory-snapshots</url>
         </snapshotRepository>
     </distributionManagement>
