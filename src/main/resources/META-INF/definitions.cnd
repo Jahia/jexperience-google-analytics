@@ -3,23 +3,17 @@
 <wemgooglemix = 'http://www.jahia.org/jahia/wemga/mix/1.0'>
 <wemgoogle = 'http://www.jahia.org/jahia/at/wemga/1.0'>
 
-//Area Level
 [wemgooglemix:experiment] mixin
- itemtype = options
- - wemgaExperimentId (string)
- - wemgaExperimentName (string)
- - wemgaExperimentStatus (string)
+ - wemgaExperimentId (string) hidden indexed=no
+ - wemgaExperimentName (string) hidden indexed=no
+ - wemgaExperimentStatus (string) hidden indexed=no
 
-//Variant
 [wemgooglemix:variable] mixin
- itemtype = options
- - wemgaVariableId (long)
- - wemgaVariableName (string)
+ - wemgaVariableId (long) hidden indexed=no
+ - wemgaVariableName (string) hidden indexed=no
 
 [jmix:googleAnalyticsExperiment] mixin
- extends=jnt:virtualsite
- itemtype=options
- - googleAnalytics_accountID (string) nofulltext
- - googleAnalytics_profileId (string) nofulltext
- - google_apiKey (string) nofulltext
- - google_oAuthKey (string) nofulltext
+ - googleAnalytics_accountID (string) hidden indexed=no
+ - googleAnalytics_profileId (string) hidden indexed=no
+ - google_apiKey (string) hidden indexed=no
+ - google_oAuthKey (string) hidden indexed=no
