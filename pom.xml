@@ -69,7 +69,7 @@
 
     <properties>
         <jahia.nexus.staging.repository.id>1b7030912bcbea1</jahia.nexus.staging.repository.id>
-        <jahia-module-signature>MCwCFERAbCmXR5yf2Vx4/xXnGPeovVzVAhRxCR0j6yFuD4n3fZko20T3PQK9Xg==</jahia-module-signature>
+        <jahia-module-signature>MCwCFBom0N0UIvfwX1kKS6etWaN9PQKNAhQcZa/qzkABhW3Wb0TqOD8G0ZKXrg==</jahia-module-signature>
         <jahia-depends>default,jexperience=[2,3),googleAnalytics</jahia-depends>
     </properties>
 
